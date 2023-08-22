@@ -44,22 +44,21 @@ public class PercolationStats {
 
         for (int count = 0; count < t; count++) {
             Percolation pr = new Percolation(n);
-            int openedSites = 0;
             while (!pr.percolates()) {
                 int i = StdRandom.uniformInt(1, n + 1);
                 int j = StdRandom.uniformInt(1, n + 1);
                 if (!pr.isOpen(i, j)) {
                     pr.open(i, j);
-                    openedSites++;
                 }
             }
-            double fraction = (double) openedSites / (n * n);
+            double fraction = (double) pr.numberOfOpenSites() / (n * n);
             ps.fractions[count] = fraction;
 
         }
 
-        StdOut.println("mean = " + ps.mean());
-        StdOut.println("stddev = " + ps.stddev());
-        StdOut.println("95% confidence interval = " + ps.confidenceLo() + ", " + ps.confidenceHi());
+        StdOut.println("mean                   = " + ps.mean());
+        StdOut.println("stddev                 = " + ps.stddev());
+        StdOut.println(
+                "95% confidence interval= [" + ps.confidenceLo() + "," + ps.confidenceHi() + "]");
     }
 }
