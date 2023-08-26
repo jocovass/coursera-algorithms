@@ -1,0 +1,20 @@
+.DS_Store
+*.pem
+*.log
+*.log*
+/NOTES.md
+/packages/*/dist
+/internal/*/dist
+.vscode
+node_modules
+.cache
+.turbo
+.env
+coverage
+
+# website
+/website-deploy-key
+/website-deploy-key.pub
+/website/public/
+/__git
+/test
