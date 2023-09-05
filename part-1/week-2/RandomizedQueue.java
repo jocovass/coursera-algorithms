@@ -67,7 +67,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         private int current = size;
 
         public boolean hasNext() {
-            return size > 0;
+            return current > 0;
         }
 
         public Item next() {
@@ -77,7 +77,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             int index = StdRandom.uniformInt(0, current);
             Item item = q[index];
             q[index] = q[--current];
-            q[size] = null;
+            q[current] = null;
             return item;
         }
 
