@@ -64,20 +64,29 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private class RandomizedQueueIterator implements Iterator<Item> {
-        private int current = size;
+        private Item[] iteratorQ;
+        private int current;
+
+        public RandomizedQueueIterator() {
+            iteratorQ = (Item[]) new Object[size];
+            current = size;
+            for (int i = 0; i < size; i++) {
+                iteratorQ[i] = q[i];
+            }
+        }
 
         public boolean hasNext() {
             return current > 0;
         }
 
         public Item next() {
-            if (current > 0) {
+            if (current == 0) {
                 throw new NoSuchElementException();
             }
             int index = StdRandom.uniformInt(0, current);
-            Item item = q[index];
-            q[index] = q[--current];
-            q[current] = null;
+            Item item = iteratorQ[index];
+            iteratorQ[index] = iteratorQ[--current];
+            iteratorQ[current] = null;
             return item;
         }
 
