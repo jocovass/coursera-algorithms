@@ -205,7 +205,7 @@ public class BinarySearchThreeST<Key extends Comparable<Key>, Value> {
 
     /**
      * Return the rank of a key.
-     * For this  can use the 'count' property we store on each node.
+     * For this we can use the 'count' property we store on each node.
      * <p>
      * If node is null return 0.
      * <p>

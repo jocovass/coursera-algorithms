@@ -1,3 +1,10 @@
+/*
+ * Symbol Tables
+ *
+ * Analysis:
+ * - get: O(log N)
+ * - put: O(log N)
+ */
 public class SymbolTable<Key extends Comparable<Key>, Value> {
     // Store keys and values in two array
     private Key[] keys;
@@ -21,7 +28,7 @@ public class SymbolTable<Key extends Comparable<Key>, Value> {
 
     // Returns the key value if exists or NULL if it doesn't
     public Value get(Key key) {
-        if (isEmpty()) return null;
+        if (is Empty()) return null;
         // Rank will return the position of the item if it exists otherwise
         // will return the position where it should be inserted
         // we can laverage this information and use the same function for the put method
@@ -43,7 +50,7 @@ public class SymbolTable<Key extends Comparable<Key>, Value> {
             return;
         }
 
-        // Shit all items to the right of the item by one and insert the new item
+        // Shift all items to the right of the item by one and insert the new item
         // In sorted order
         for (int l = N; l > i; l--) {
             keys[l] = keys[l - 1];

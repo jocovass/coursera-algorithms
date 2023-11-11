@@ -1,10 +1,24 @@
-import java.util.Comparator;
+/*
+ * Binary Max Heap
+ *
+ * Analysis:
+ * - insert: O(log N)
+ * - delete: O(log N)
+ * - max: O(1)
+ *
+ * Heap sort
+ * - can be done in place
+ * - not stable
+ * - worst case 2 N log N, best case N log N
+ */
+import java.util.Comparato;
 
 public class BinaryHeapMaxPq<Key extends Comparable<Key>> {
     private Key[] pq;
     private int N;
 
     // This is just an example how heap sort could be implemented
+    // It should accept an array that needs to be sorted
     public Key[] sort() {
         int L = N;
         Key[] sortedPq = (Key[]) new Comparable[N];
@@ -14,9 +28,16 @@ public class BinaryHeapMaxPq<Key extends Comparable<Key>> {
         for (int k = L / 2; k > 1; k--)
             sink(k);
 
+        // After we have a valid max heap
+        // We create a sorted array from max item to lowest item
         while (L > 1) {
+            // First element is the largest in a MAX heap
+            // and it is the last item in an ASC array
             sortedPq[L - 1] = pq[1];
+            // After we saved the larges item in the sorted array
+            // swap max with smallest in the heap
             swap(1, L);
+            // Ensure we have a valid max heap
             sink(1);
             L--;
         }

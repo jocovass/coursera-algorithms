@@ -1,3 +1,18 @@
+/*
+ * Priority queue (unordered)
+ * Analysis:
+ * - insertion: O(1)
+ * - del (min|max): O(N)
+ * - max: O(N)
+ *
+ *
+ * Priority queue (ordered)
+ * Analysis:
+ * - insertion: O(N)
+ * - del (min|max): O(1)
+ * - max: O(1)
+ *
+ */
 import java.util.Comparator;
 
 public class UnorderedMaxPq<Key extends Comparable<Key>> {

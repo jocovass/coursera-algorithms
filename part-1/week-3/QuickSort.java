@@ -1,9 +1,17 @@
+/*
+ * Name: Quick sort
+ * Time: N log N
+ * Space: does not use any extra space
+ * Not stable.
+ */
 public class QuickSort {
   public void quickSort(int[] array) {
       // Use a random shuffle on the array, this ensures that
       // Quick sort runtime is always O(N log N)
       // StdRandom.shuffle
       threeWayPartitioning(array, 0, array.length-1);
+      
+      // sort(array, 0, array.length-1);
   }
 
   private void shuffle(int[] a) {
@@ -19,14 +27,19 @@ public class QuickSort {
   // Recursivle sort each subarray
   private void sort(int[] array, int lo, int hi) {
       if (hi <= lo) return;
-      // One possible improvements could be to take the median of 3 items
-      // Example: lo, middle, hi
+      // One possible optimisation could be to take the median of 3 items
+      // slightly fewer compares.
+      //
+      // @example 
+      // int m = medianOf3(lo, lo+(hi-lo)/2, hi)
+      // swap(a, lo, m);
 
       // partition
       int j = partition(array, lo, hi);
-      // Sort left side
+      // Sort left side of the array from the pivot not including the pivot
+      // itself
       sort(array, lo, j - 1);
-      // Sort right side
+      // Sort right side of the array form the pivot
       sort(array, j + 1, hi);
   }
 
@@ -53,29 +66,32 @@ public class QuickSort {
     threeWayPartitioning(array, lo, lt - 1);
     threeWayPartitioning(array, gt + 1, hi);
   }
-
+  
   // We select a pivot point(we use the "lo" for this)
   // And sort the array so that at the end all the items
-  // To the right of the pivot is higher than the pivot
-  // And all the items to the left is less than the pivot
+  // To the right of the pivot are higher than the pivot
+  // And all the items to the left are less than the pivot
   private int partition(int[] array, int lo, int hi) {
       int i = lo;
       int j = hi + 1;
       // Do this while the right pointer is not less or equalt to the left pointer
       while (true) {
-        // Find the first item from the left that is higher than the pivot
+        // Loop until we find an item that is bigger than the pivot
+        // starting from left, or until i is equal to hi
         while(less(array[++i], array[lo])) {
             if (i == hi) break;
         }
 
-        // Find the first item from the right that is less than the pivot
+        // Loop until we find an item that is smaller than the pivot
+        // starting from right, or until j is equal to lo
         while(less(array[lo], array[--j])) {
             if (j == lo) break;
         }
 
         // If j is less than or equal to i we don't want to change the
-        // Items in the array because we know they are in the correct order
+        // Items in the array because that means they are in the correct order
         if (j <= i) break;
+        // Othervise swap 
         swap(array, i, j);
       }
       // Before returning the index of the new pivot make sure we place it
